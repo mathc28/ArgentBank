@@ -1,0 +1,40 @@
+.main-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 20px;
+}
+
+.main-nav-logo{
+    display: flex;
+    align-items: center;
+}
+
+.main-nav-logo img{
+   
+    width: 200px;
+    height: 54px;
+}
+
+.main-nav-item{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+    margin-right: 0.5rem;
+}
+
+.main-nav a {
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.main-nav a:hover {
+    text-decoration: underline;
+}
+
+.usericon {
+    height: 16px;
+    width: 16px;
+    margin-right: 3px;
+}
