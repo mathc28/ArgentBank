@@ -4,7 +4,7 @@ import './style.css'
 
 const signin = () => {
     return (
-        <div class="form-login">
+        <div className="form-login">
            <Login/> 
         </div>
     );

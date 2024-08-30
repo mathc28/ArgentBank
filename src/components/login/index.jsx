@@ -1,60 +1,95 @@
 import Icon from './circle-user-solid.svg';
 import './style.css';
-import React, { useState, useEffect } from 'react';
-import { useDispatch} from 'react-redux';
-import { useNavigate} from 'react-router-dom';
-import { setToken } from '../../feature/user';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setUserAuth, storeToken } from '../../feature/login';
 
 const Login = () => {
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [rememberMe, setRememberMe] = useState(false);
-    const [error, setError] = useState(false);
-
+    const [error, setError] = useState(null);
 
     const dispatch = useDispatch();
-    const navigate = useNavigate(); 
-     
-    useEffect(() => {
- 
-    const response = fetch("http://localhost:3001/api/v1/user/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({email, password}),
-        });
-        if (response.ok) {
-            const data = response.json();    
-            const token = data.body.token;
-            dispatch(setToken({token, rememberMe}));
-            navigate('/user');
-        } else {
-            setError(true)
-        }   
-    }, []);
+    const navigate = useNavigate();
+
+    const resetForm = () => {
+        setEmail('');
+        setPassword('');
+        setRememberMe(false);
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            const response = await fetch("http://localhost:3001/api/v1/user/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                const token = data.body.token;
+
+                // Dispatch des informations d'authentification
+                dispatch(setUserAuth({ email, password, token }));
+
+                // Stocker le token dans le localStorage
+                dispatch(storeToken());
+
+                navigate('/user');
+                resetForm();
+            } else {
+                const errorData = await response.json();
+                setError(errorData.message || "Une erreur est survenue. Veuillez réessayer.");
+            }
+        } catch (error) {
+            console.error("Error fetching data:", error);
+            setError("Une erreur réseau est survenue. Veuillez vérifier votre connexion.");
+        }
+    };
 
     return (
         <section className="main-login">
             <div className="sign-in-content">
                 <img src={Icon} alt="user icon" className='usericon'/>
                 <h1>Sign In</h1>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <div className="input-wrapper">
-                        <label for="username">Username</label>
-                        <input id='username' type='text' value={email} onChange={(event) => setEmail(event.target.value)} />
+                        <label htmlFor="form-username">Username</label>
+                        <input 
+                            id='form-username' 
+                            type='email' 
+                            value={email} 
+                            onChange={(event) => setEmail(event.target.value)} 
+                            required 
+                        />
                     </div>
                     <div className="input-wrapper">
-                        <label for="password">Password</label>
-                        <input id='password' type='password' value={password} onChange={(event) => setPassword(event.target.value)} />
+                        <label htmlFor="password">Password</label>
+                        <input 
+                            id='password' 
+                            type='password' 
+                            value={password} 
+                            onChange={(event) => setPassword(event.target.value)} 
+                            required 
+                        />
                     </div>
-                    <div className="input-remember">
-                        <label for="remember-me">Remember me</label>
-                        <input id='remember-me' type='checkbox' value={rememberMe} onChange={(event) => setRememberMe(event.target.value)} />
+                    <div className="input-remember">                       
+                        <input 
+                            id='remember-me' 
+                            type='checkbox' 
+                            checked={rememberMe} 
+                            onChange={(event) => setRememberMe(event.target.checked)} 
+                        />
+                        <label htmlFor="remember-me">Remember me</label>
                     </div>
-                    <a href="./user" className="sign-in-button">Sign In</a>
-                    {error && <p>Une erreur est survenue</p>}
+                    <button type="submit" className="sign-in-button">Sign In</button>
+                    {error && <p className="error-message">{error}</p>}
                 </form>
             </div>
         </section>
