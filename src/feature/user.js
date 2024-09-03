@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  token: null,
-  isLoading: null,
-  error: null,
-  user: null, 
+  email: '',
+  firstName: '',
+  lastName: '',
+  id: '',
 };
 
 export const userSlice = createSlice({
@@ -19,6 +19,13 @@ export const userSlice = createSlice({
         localStorage.removeItem("token");
       }
     },
+
+    setUserInfos: (state, action) => {
+      state.firstname = action.payload.firstname;
+      state.lastname = action.payload.lastname;
+      state.email = action.payload.email;
+      state.id = action.payload.id;
+    },
   
     clearUser: (state) => {
       state.token = "";
@@ -30,6 +37,8 @@ export const userSlice = createSlice({
     },
   },
 });
+
+export const getUserData = (state) => state.user
 
 export const { setToken, clearUser } = userSlice.actions;
 

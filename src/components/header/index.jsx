@@ -5,13 +5,16 @@ import Logo from './logo.png';
 import Iconuser from './circle-user-solid.svg';
 import Iconlogout from './arrow-right-from-bracket-solid.svg';
 import './style.css';
-import { logout } from '../../feature/login'; 
+import { logout } from '../../feature/login';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
-    const { token, userName } = useSelector((state) => state.login);
+    const { token, firstName } = useSelector((state) => state.login);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    console.log("firstName from Redux:", firstName); // Ajoutez ce log pour vérifier
+
 
     const handleLogout = () => {
         // Dispatcher l'action de déconnexion
@@ -36,12 +39,12 @@ const Header = () => {
                     <div className='nav-right'>
                         <div className="main-nav-item">
                             <img className="usericon" src={Iconuser} alt="icone user" />              
-                            {userName || 'User'}
+                            {firstName}
                         </div>
-                        <Link className="main-nav-item" onClick={handleLogout}>
+                        <button className="main-nav-item btn-nav" onClick={handleLogout}>
                             <img className="usericon" src={Iconlogout} alt="icone logout" />
                             Sign Out
-                        </Link>
+                        </button>
                     </div>
                 ) : (
                     <div>

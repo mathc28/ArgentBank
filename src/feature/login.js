@@ -5,17 +5,18 @@ export const loginSlice = createSlice({
     initialState: {
         isConnected: false,
         token: "",
-        firstname: "",
-        lastname: "",
+        firstName: "",
+        lastName: "",
         email: "",
         userName: ""
     },
     reducers: {
         setUserInfos: (state, action) => {
-            state.firstname = action.payload.firstname;
-            state.lastname = action.payload.lastname;
+            state.firstName = action.payload.firstName;
+            state.lastName = action.payload.lastName;
             state.email = action.payload.email;
             state.userName = action.payload.userName;
+            state.isConnected = true;
         },
         setUserAuth: (state, action) => {
             state.email = action.payload.email;
@@ -34,8 +35,8 @@ export const loginSlice = createSlice({
             state.token = "";
             state.email = "";
             state.password = "";
-            state.firstname = "";
-            state.lastname = "";
+            state.firstName = "";
+            state.lastName = "";
             state.userName = "";
 
             // Supprimer le token du localStorage

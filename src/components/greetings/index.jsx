@@ -32,12 +32,10 @@ const Greeting = () => {
           }
         })
         .catch((error) => {
-          console.error('Erreur', error);
         });
     }
   }, [dispatch]);
 
-  console.log('User state:', user); // Debug
 
   const handleChange = (event) => {
     const { id, value } = event.target;

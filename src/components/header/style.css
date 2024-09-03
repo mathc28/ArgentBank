@@ -48,3 +48,15 @@
     width: 16px;
     margin-right: 3px;
 }
+
+.btn-nav{
+        background: none; /* Retire la couleur de fond */
+        border: none; /* Retire les bordures */
+        padding: 0; /* Supprime le padding */
+        margin: 0; /* Supprime le margin */
+        font: inherit; /* Hérite de la police parente */
+        color: inherit; /* Hérite de la couleur du texte parente */
+        cursor: pointer; /* Garde le curseur pointer pour indiquer un élément cliquable */
+        outline: none; /* Supprime l'effet de focus par défaut */
+
+}
