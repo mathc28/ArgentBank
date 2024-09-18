@@ -7,13 +7,12 @@ import './style.css';
 
 
 const User = () => {
-
-    return (
-        <div className='backgroundcolor'>
-         <Greetings />   
-         <Accounts />
-        </div>
-    );
+  return (
+    <div className='backgroundcolor'>
+      <Greetings />   
+      <Accounts />
+    </div>
+  );
 };
 
 export default User;

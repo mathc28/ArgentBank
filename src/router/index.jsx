@@ -9,11 +9,11 @@ import Connexion from "../pages/signin"
  * Configuration des routes de l'application
  */
 function Router (){
-    return <Routes>
-        <Route path="/" element={<Accueil />} />
-        <Route path="/signin" element={<Connexion />} />
-        <Route path="/user" element={<Logement />} />
-    </Routes>
+  return <Routes>
+    <Route path="/" element={<Accueil />} />
+    <Route path="/signin" element={<Connexion />} />
+    <Route path="/user" element={<Logement />} />
+  </Routes>
 }
 
 export default Router

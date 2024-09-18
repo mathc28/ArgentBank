@@ -4,8 +4,6 @@ import Footer from "./components/footer";
 import Router from "./router";
 
 function App() {
-  // Récupérer le token en localStorage
-  // Puis on fais appel à POST Profile
 
   return (
     <div className="app">
