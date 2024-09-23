@@ -1,9 +1,9 @@
-import Icon from './circle-user-solid.svg';
+import Icon from "../../assets/circle-user-solid.svg";
 import './style.css';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setUserAuth, setUserInfos, storeToken } from '../../feature/login';
+import { setUserAuth, setUserInfos, storeToken } from '../../reducer/login';
 
 const Login = () => {
   const [email, setEmail] = useState('');

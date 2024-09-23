@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import Logo from './logo.png';
-import Iconuser from './circle-user-solid.svg';
-import Iconlogout from './arrow-right-from-bracket-solid.svg';
+import Logo from '../../assets/logo.png';
+import Iconuser from '../../assets/circle-user-solid.svg';
+import Iconlogout from '../../assets/arrow-right-from-bracket-solid.svg';
 import './style.css';
 import { logout } from '../../feature/login';
 import { Link } from 'react-router-dom';
