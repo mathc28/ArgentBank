@@ -62,12 +62,7 @@ const Greeting = () => {
           <form className="form" onSubmit={handleSave}>
             <div className="edit-input">
               <label htmlFor="username">User name:</label>
-              <input
-                type="text"
-                id="username"
-                value={newUserName}
-                onChange={(e) => setNewUserName(e.target.value)}
-              />
+              <input type="text" id="username" value={newUserName} onChange={(e) => setNewUserName(e.target.value)} />
             </div>
             <div className="edit-input">
               <label htmlFor="firstname">First name:</label>

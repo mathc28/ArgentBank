@@ -2,7 +2,7 @@
 import { Routes, Route } from "react-router-dom";
 
 import Accueil from "../pages/home";
-import Logement from "../pages/user";
+import User from "../pages/user";
 import Connexion from "../pages/signin"
 
 /**
@@ -12,7 +12,7 @@ function Router (){
   return <Routes>
     <Route path="/" element={<Accueil />} />
     <Route path="/signin" element={<Connexion />} />
-    <Route path="/user" element={<Logement />} />
+    <Route path="/user" element={<User />} />
   </Routes>
 }
 

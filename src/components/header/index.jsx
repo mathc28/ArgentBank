@@ -5,7 +5,7 @@ import Logo from '../../assets/logo.png';
 import Iconuser from '../../assets/circle-user-solid.svg';
 import Iconlogout from '../../assets/arrow-right-from-bracket-solid.svg';
 import './style.css';
-import { logout } from '../../feature/login';
+import { logout } from '../../reducer/login';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
@@ -26,11 +26,7 @@ const Header = () => {
     <header>
       <nav className="main-nav">
         <Link className="main-nav-logo" to="/">
-          <img
-            className="main-nav-logo-image"
-            src={Logo}
-            alt="Argent Bank Logo"
-          />
+          <img className="main-nav-logo-image" src={Logo} alt="Argent Bank Logo" />
           <h1 className="sr-only">Argent Bank</h1>
         </Link>
         {token ? (
