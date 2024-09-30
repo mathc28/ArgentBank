@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './style.css';
@@ -10,26 +10,17 @@ const Greeting = () => {
 
   const [display, setDisplay] = useState(false);
   const [newUserName, setNewUserName] = useState(userName);
-  const [newFirstName, setNewFirstName] = useState(firstName); // État pour le prénom
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-
-    if (token === "") {
-      console.log('No token found, redirecting to homepage.');
-      navigate('/');
-    }
-  }, [navigate]);
 
   const handleSave = (e) => {
     e.preventDefault();
 
-    console.log('Saving new user info:', { newFirstName, newUserName });
+    console.log('Saving new user info:', { newUserName });
 
     dispatch({
       type: 'login/setUserInfos',
       payload: {
-        firstName: newFirstName, // Nouveau prénom
+        firstName, // Nouveau prénom
         lastName,
         userName: newUserName, // Nouveau username
       },
@@ -38,7 +29,6 @@ const Greeting = () => {
   };
 
   const handleCancel = () => {
-    setNewFirstName(firstName); // Réinitialise à l'ancien prénom
     setNewUserName(userName);   // Réinitialise à l'ancien username
     setDisplay(false);
   };
@@ -73,11 +63,7 @@ const Greeting = () => {
             <div className="edit-input">
               <label htmlFor="firstname">First name:</label>
               <input
-                type="text"
-                id="firstname"
-                value={newFirstName} // Utilise l'état local pour gérer le prénom
-                onChange={(e) => setNewFirstName(e.target.value)} // Permet la modification du prénom
-              />
+                type="text" id="firstname" value={firstName} readOnly />
             </div>
             <div className="edit-input">
               <label htmlFor="lastname">Last name:</label>

@@ -69,6 +69,8 @@
 }
 
 #firstname{
+    background-color: grey;
+    opacity: 0.3;
     height: 30px;
     width: 138px;
     padding-left: 10px;

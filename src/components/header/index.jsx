@@ -9,11 +9,11 @@ import { logout } from '../../reducer/login';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
-  const { token, firstName } = useSelector((state) => state.login);
+  const { token, userName } = useSelector((state) => state.login);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  console.log("firstName from Redux:", firstName); // Ajoutez ce log pour vérifier
+  console.log("firstName from Redux:", userName); // Ajoutez ce log pour vérifier
 
   const handleLogout = () => {
     // Dispatcher l'action de déconnexion
@@ -33,7 +33,7 @@ const Header = () => {
           <div className='nav-right'>
             <div className="main-nav-item">
               <img className="usericon" src={Iconuser} alt="icone user" />              
-              {firstName}
+              {userName}
             </div>
             <button className="main-nav-item btn-nav" onClick={handleLogout}>
               <img className="usericon" src={Iconlogout} alt="icone logout" />

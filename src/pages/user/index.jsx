@@ -21,7 +21,23 @@ const User = () => {
   return (
     <div className='backgroundcolor'>
       <Greetings />   
-      <Accounts />
+      <div classNsame="accounts-list">
+        <Accounts 
+          title="Argent Bank Checking (x8349)" 
+          amount="$2,082.79" 
+          amountDescription="Available Balance" 
+        />
+        <Accounts 
+          title="Argent Bank Savings (x6712)" 
+          amount="$10,928.42" 
+          amountDescription="Available Balance" 
+        />
+        <Accounts 
+          title="Argent Bank Checking (x8349)" 
+          amount="$184.30" 
+          amountDescription="Current Balance" 
+        />
+    </div>
     </div>
   );
 };
