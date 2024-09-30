@@ -1,0 +1,435 @@
+swagger: '2.0'
+info:
+  title: Bank Argent API documentation
+  description: Contains all available API endpoints in this codebase
+  version: '1.0.0'
+  termsOfService: 'http://swagger.io/terms/'
+host: localhost:3001
+basePath: /api/v1
+schemes:
+  - http
+paths:
+  /user/login:
+    post:
+      tags:
+        - User Module
+      summary: Login
+      description: API for Login
+      parameters:
+        - in: body
+          name: body
+          description: Login Payload
+          required: true
+          schema:
+            $ref: '#/definitions/Login'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Login Successfully
+          schema:
+            $ref: '#/definitions/LoginResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  
+  /user/signup:
+    post:
+      tags:
+        - User Module
+      summary: Signup
+      description: API for Signup
+      parameters:
+        - in: body
+          name: body
+          description: Signup Payload
+          required: true
+          schema:
+            $ref: '#/definitions/User'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Signup Successfully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  
+  /user/profile:
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - User Module
+      summary: User Profile API
+      description: API for fetching a user profile
+      #produces:
+       # - application/json
+      responses:
+        '200':
+          description: User profile retrieved successully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - User Module
+      summary: User Profile API
+      description: API for updating a user profile
+      parameters:
+        - in: body
+          name: body
+          description: Update user profile attributes
+          required: true
+          schema:
+            $ref: '#/definitions/UserProfile'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: User profile retrieved successully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+
+  /user/accounts:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Accounts and transactions Module
+      summary: Allow to find all accounts of the user
+      description: API to show all user's accounts 
+      responses:
+        '200':
+          description: All accounts retrieved successully
+          schema:
+            type: array
+            items:
+             $ref: '#/definitions/account'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+
+  /user/accounts/{accountID}/transactions:
+    get: 
+      security:
+        - Bearer: []
+      tags: 
+        - Accounts and transactions Module
+      summary: Transactions of a specific account 
+      description: API to show a list of transactions of a specific account
+      parameters:
+        - in: path
+          name: accountID
+          description: account's ID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: All transactions retrieved successully
+          schema:
+            type: array
+            items :
+              $ref: '#/definitions/transactions'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+          
+  /user/accounts/{accountID}/transactions/{transactionID}:
+    get: 
+      security:
+        - Bearer: []
+      tags: 
+        - Accounts and transactions Module
+      summary: Specific informations of an Transaction
+      description: API to show a list of transactions of a specific account
+      parameters:
+        - in: path
+          name: accountID
+          description: account's ID
+          required: true
+          type: string
+        - in : path   
+          name: transactionID
+          description: transaction's ID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: All transactions retrieved successully
+          schema:
+            type: array
+            items :
+              $ref: '#/definitions/transactions'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+
+    put:
+      security:
+        - Bearer: []
+      tags: 
+          - Accounts and transactions Module
+      summary: Update transaction's category
+      description: API for updating category of transaction
+      parameters:
+        - in: path
+          name: accountID
+          description: account's ID
+          required: true
+          type: string
+        - in: path
+          name: transactionID
+          description: transaction's ID
+          required: true
+          type: string
+        - in: body
+          name: transaction's category
+          description: Modified transaction's category
+          required: true
+          schema:
+            $ref: '#/definitions/transacCat'
+      responses:
+          '200':
+            description: the category has been modified
+            schema:
+              $ref: '#/definitions/transacCat'
+          '400':
+            description: Invalid Fields
+          '500':
+            description: Internal Server Error  
+
+    post:
+      security: 
+        - Bearer: []
+      tags: 
+        - Accounts and transactions Module
+      summary: Adding a note to a transaction
+      description: API for adding a note to a transaction
+      parameters:
+        - in: path
+          name: accountID
+          description: account's ID
+          required: true
+          type: string
+        - in: path
+          name: transactionID
+          description: transaction's ID
+          required: true
+          type: string
+        - in: body
+          name: note
+          description: New transaction's note
+          required: true
+          schema: 
+            $ref: '#/definitions/transacNote'
+      responses:
+        '200':
+          description: A note has been created
+          schema:
+            $ref: '#/definitions/transacNewNote'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error  
+
+    patch:
+      security: 
+        - Bearer: []
+      tags:
+        - Accounts and transactions Module
+      summary: Modifying a transaction's note
+      description: API for modifying a note of a transaction
+      parameters:
+        - in: path
+          name: accountID
+          description: account's ID
+          required: true
+          type: string
+        - in: path
+          name: transactionID
+          description: transaction's ID
+          required: true
+          type: string
+        - in: body
+          name: note
+          description: Modify transaction's note
+          required: true
+          schema: 
+            $ref: '#/definitions/transacNote'
+      responses:
+        '200':
+          description: All transactions retrieved successully
+          schema:
+            $ref: '#/definitions/transacNoteModif'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error  
+    
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - Accounts and transactions Module
+      summary: allow to delete a transaction's note
+      description: API for deleting a note of a transaction
+      parameters:
+        - in: path
+          name: accountID
+          description: account's ID
+          required: true
+          type: string
+        - in: path
+          name: transactionID
+          description: transaction's ID
+          required: true
+          type: string
+      responses:
+        '200':
+          description: The note has been deleted
+          schema:
+            $ref: '#/definitions/transactions'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error  
+
+
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+definitions:
+  User:
+    properties:
+      email:
+        type: string
+        description: user email
+      password:
+        type: string
+        description: user password
+      firstName:
+        type: string
+        description: user first name
+      lastName:
+        type: string
+        description: user last name
+      userName:
+        type: string
+        description: user public name
+  Login:
+    properties:
+      email:
+        type: string
+        description: user email
+      password:
+        type: string
+        description: user password
+  ApiResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+      message:
+        type: string
+      body:
+        type: object
+        properties:
+          id:
+            type: string
+          email:
+            type: string
+  LoginResponse:
+    type: object
+    properties:
+      token:
+        type: string
+  UserProfile:
+    type: object
+    properties:
+      userName:
+        type: string
+ 
+  account:
+      type: object
+      properties:
+        id:
+          type: string
+          description: account's ID
+        accountName:
+          type: string
+          description: account's name
+        currentBalance:
+          type: number
+          description: account's balance
+  transactions:
+      type: object
+      properties:
+        transactionID: 
+          type: string
+          description: transaction's ID
+        transactionType:
+          type: string
+          description: transaction's type
+        date:
+          type: string
+          description: transaction's date
+        description:
+          type: string
+          description: transaction's description
+        balance:
+          type: number
+          description: balance available
+        amount:
+          type: number
+          description: transaction's amout
+        category:
+          type: string
+          description: category's name
+        note: 
+          type: string
+          description: transaction's note 
+  transacCat:
+    type: object
+    properties:
+      category:
+        type: string
+  transacNote:
+    type: object
+    properties:
+      note:
+        type: string
+      noteID:
+        type: string  
+  transacNewNote:
+    type: object
+    properties:
+      note:
+        type: string
+      noteID:
+        type: string   
+  transacNoteModif:
+    type: object
+    properties:
+      note:
+        type: string
+      noteID:
+        type: string
