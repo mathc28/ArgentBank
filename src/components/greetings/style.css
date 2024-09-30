@@ -69,17 +69,12 @@
 }
 
 #firstname{
-    background-color: grey;
-    opacity: 0.3;
     height: 30px;
-    width: 140px;
+    width: 138px;
     padding-left: 10px;
-    margin-left: 10px;
+    margin-left: 7px;
     border-radius: 5px;
-    border: none;
-    font-weight: bold;
-    color: black;
-    
+    border:  solid 1px;
 
 }
 
@@ -89,7 +84,7 @@
     height: 30px;
     width: 140px;
     padding-left: 10px;
-    margin-left: 10px;
+    margin-left: 7px;
     border-radius: 5px;
     border: none;
     font-weight: bold;
@@ -102,7 +97,7 @@
     height: 30px;
     width: 138px;
     padding-left: 10px;
-    margin-left: 7px;
+    margin-left: 4px;
     border-radius: 5px;
     border:  solid 1px;
 
